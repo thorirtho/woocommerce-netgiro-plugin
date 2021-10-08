@@ -260,7 +260,7 @@ function woocommerce_netgiro_direct_init()
         {
             global $woocommerce;
 
-            $customer_id = sanitize_text_field( $_POST['ng-msisdn'] );
+            $customer_id = sanitize_text_field($_POST['ng-msisdn']);
             $nonce = wp_create_nonce();
 
             $netgiro_args = $this->get_request_body($order_id, $customer_id);
@@ -268,8 +268,7 @@ function woocommerce_netgiro_direct_init()
             $signature = $this->get_signature($nonce, $netgiro_args);
             var_dump($signature);
 
-            if (!is_array($netgiro_args))
-            {
+            if (!is_array($netgiro_args)) {
                 return $netgiro_args;
             }
 
@@ -296,10 +295,12 @@ function woocommerce_netgiro_direct_init()
             $insertCartStatus = $jdecode['Success'];
             var_dump($insertCartStatus);
 
-                return array(
-                    'result' => 'success',
-                    'redirect' => $this->get_return_url($order)
-                );
+            // TODO Handle response here
+
+            return array(
+                'result' => 'success',
+                'redirect' => $this->get_return_url($order)
+            );
         }
 
         function netgiro_response()
